@@ -2,7 +2,7 @@
   {:source-paths #{"src"}
    :resource-paths #{"resources"}
    :dependencies '[[com.hyperfiddle/hypercrud.browser "0.2.0-SNAPSHOT"]
-                   [funcool/promesa "1.8.1"] #_[funcool/promesa "1.8.1-HYPERCRUD"]
+                   [funcool/promesa "1.8.1"]
                    [org.clojure/clojurescript "1.9.473"]
                    [reagent "0.6.0" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]
 
@@ -35,8 +35,8 @@
 
 
 (deftask browser []
-         (merge-env! :dependencies '[[kibu/pushy "0.3.6"]
-                                     [com.hyperfiddle/hypercrud.platform.browser "0.2.0-SNAPSHOT"]]
+         (merge-env! :dependencies '[[com.hyperfiddle/hypercrud.platform.browser "0.2.0-SNAPSHOT"]
+                                     [kibu/pushy "0.3.6"]]
                      :source-paths #{"src-browser"}
                      :resource-paths #{"generated-resources-browser"})
          (comp (cljs)
