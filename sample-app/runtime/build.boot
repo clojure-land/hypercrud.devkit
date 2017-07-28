@@ -6,7 +6,6 @@
                    [org.clojure/clojurescript "1.9.473"]
                    [reagent "0.6.0" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]
 
-
                    ; build/test/dev
                    [adzerk/boot-cljs "1.7.228-1" :scope "test"]
                    [adzerk/boot-cljs-repl "0.3.3" :scope "test"]
@@ -22,10 +21,7 @@
 (set-env!
   ; we don't want intellij to look at util-src, just reference the dependency to auto-manage the module
   :boot.lein/project-clj {:source-paths (-> (:source-paths global-conf)
-                                            (conj "src-node"
-                                                  "src-browser"
-                                                  "src-browser-dev"
-                                                  "src-browser-prod"))})
+                                            (conj "src-browser"))})
 
 (require '[adzerk.boot-cljs :refer :all]
          '[pandeiro.boot-http :refer :all]
@@ -38,27 +34,12 @@
        :version "0.1.0-SNAPSHOT"})
 
 
-(deftask browser [b build VAL str "'dev' or 'prod'"]
-         (assert (or (= build "dev") (= build "prod")))
+(deftask browser []
          (merge-env! :dependencies [[kibu/pushy "0.3.6"]]
-                     :source-paths #{"src-browser"
-                                     (str "src-browser-" build)}
+                     :source-paths #{"src-browser"}
                      :resource-paths #{"generated-resources-browser"})
          (comp (cljs)
                (target :dir #{(str "target/browser")})))
-
-(deftask browser-dev []
-         (comp
-           (watch)
-           (speak)
-           (browser :build "dev")))
-
-
-(deftask node []
-         (merge-env! :source-paths #{"src-node"}
-                     :resource-paths #{"resources-node"})
-         (comp (cljs)
-               (target :dir #{"target/node"})))
 
 (when (> (.lastModified (clojure.java.io/file "build.boot"))
          (.lastModified (clojure.java.io/file "project.clj")))
