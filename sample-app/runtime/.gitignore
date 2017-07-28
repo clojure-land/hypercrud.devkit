@@ -1,2 +1,8 @@
 /target
 /project.clj
+/node_modules
+/resources-node/node_modules
+/generated-resources-browser
+/out
+/.nrepl-port
+/.nrepl-history

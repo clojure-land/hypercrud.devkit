@@ -1,0 +1,30 @@
+{
+  "description": "Sample App Runtime",
+  "repository": "https://github.com/hyperfiddle/hypercrud-dev-kit",
+  "license": "EPL-1.0",
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "bluebird": "3.3.4",
+    "bootstrap": "^3.3.7",
+    "codemirror": "^5.25.2",
+    "color": "^1.0.3",
+    "deep-diff": "0.3.4",
+    "jwt-decode": "^2.2.0",
+    "moment": "^2.18.1",
+    "react": "15.4.0",
+    "react-addons-create-fragment": "15.4.0",
+    "react-dom": "15.4.0",
+    "react-native-listener": "1.0.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.11.1",
+    "style-loader": "^0.17.0",
+    "url-loader": "^0.5.8",
+    "webpack": "^1.11.0"
+  },
+  "engines": {
+    "node": "0.12.x"
+  }
+}
