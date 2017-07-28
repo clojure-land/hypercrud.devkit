@@ -32,7 +32,7 @@
    & {:keys [root-reducer initial-state service-uri]
       :or {root-reducer reducers/root-reducer
            initial-state {}
-           service-uri (goog.Uri. "http://localhost:8080")}}]
+           service-uri (goog.Uri. "http://localhost:8080/api/")}}]
   {:pre [root-conn-id app-view app-request]}
   (let [state-atom (reagent/atom (-> (merge {:entry-uri service-uri} initial-state)
                                      (root-reducer nil)))
@@ -44,6 +44,7 @@
         param-ctx {:dispatch dispatch!
                    :peer peer
                    :root-db (hc/db peer root-conn-id nil)
+                   :display-mode :user
                    :navigate-cmp navigate-cmp/navigate-cmp}]
     (set! hc/*root-conn-id* root-conn-id)
     (set! state/*request* #(app-request % param-ctx))

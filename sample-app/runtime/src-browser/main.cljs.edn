@@ -3,5 +3,5 @@
  :compiler-options {:optimizations :none
                     :pretty-print true
                     ;; root relative because SSR url changes
-                    :asset-path "/static/main.out"
+                    :asset-path "/main.out"
                     :language-in :ecmascript5}}

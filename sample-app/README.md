@@ -1,20 +1,21 @@
 
 ## Service
-### System Requirements
+#### System Requirements
 * ???
-### Build
+#### Build
     $ ???
-### Run
+#### Run
     $ ???
 
 ## Runtime
-### System Requirements
+#### System Requirements
 * [yarn](https://yarnpkg.com/en/docs/install)
 * [Boot](https://github.com/boot-clj/boot#install)
-* [Node](https://nodejs.org/)
-### Build
+* [~~Node~~](https://nodejs.org/)
+#### Build
     $ yarn
     $ NODE_ENV=production node_modules/.bin/webpack
     $ boot browser
-### Run
-    $ ???
+#### Run
+    $ cd target/browser
+    $ python -m SimpleHTTPServer
