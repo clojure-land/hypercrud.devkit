@@ -3,7 +3,6 @@
    :resource-paths #{"resources"}
    :dependencies '[[com.hyperfiddle/hypercrud.browser "0.1.0-SNAPSHOT"]
                    [funcool/promesa "1.8.1-HYPERCRUD"]
-                   [kibu/pushy "0.3.6"]
                    [org.clojure/clojurescript "1.9.473"]
                    [reagent "0.6.0" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]
 
@@ -41,7 +40,8 @@
 
 (deftask browser [b build VAL str "'dev' or 'prod'"]
          (assert (or (= build "dev") (= build "prod")))
-         (merge-env! :source-paths #{"src-browser"
+         (merge-env! :dependencies [[kibu/pushy "0.3.6"]]
+                     :source-paths #{"src-browser"
                                      (str "src-browser-" build)}
                      :resource-paths #{"generated-resources-browser"})
          (comp (cljs)
@@ -62,4 +62,4 @@
 
 (when (> (.lastModified (clojure.java.io/file "build.boot"))
          (.lastModified (clojure.java.io/file "project.clj")))
-      (boot.lein/write-project-clj))
+  (boot.lein/write-project-clj))
