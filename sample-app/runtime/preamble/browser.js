@@ -4,12 +4,8 @@ window.ReactDOM = require("react-dom");
 window.ReactDOMServer = require("react-dom/server"); // Reagent depends on ReactDOMServer in browsers
 window.Promise = require("bluebird");
 window.CodeMirror = require("codemirror");
-window.jwtDecode = require("jwt-decode");
-window.Cookies = require("js-cookie");
 window.NativeListener = require("react-native-listener");
 window.Color = require("color");
-window.deepdiff = require('deep-diff');
-window.moment = require('moment');
 
 require("codemirror/mode/clojure/clojure");
 require("codemirror/mode/markdown/markdown");
