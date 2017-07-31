@@ -7,6 +7,7 @@
 (def root-conn-id 17592186045422)
 
 (defn view [state-atom param-ctx]
+  ; todo network error handling!!
   (let [{:keys [route]} @state-atom]
     [browser/safe-ui' route param-ctx]))
 

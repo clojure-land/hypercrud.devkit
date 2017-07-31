@@ -26,7 +26,7 @@
   Optional arguments:
   root-reducer    IFn[(value action & args) => nil]
   initial-state   HashMap
-  service-uri     URI
+  service-uri     goog.URI
   "
   [root-conn-id app-view app-request
    & {:keys [root-reducer initial-state service-uri]
