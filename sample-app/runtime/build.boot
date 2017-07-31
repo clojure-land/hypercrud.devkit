@@ -17,11 +17,16 @@
                    [pandeiro/boot-http "0.7.3" :scope "test"]
                    [weasel "0.7.0" :scope "test"]]})
 
+(def browser-conf
+  {:source-paths #{"src-browser"}
+   :resource-paths #{"generated-resources-browser"}
+   :dependencies '[[com.hyperfiddle/hypercrud.platform.browser "0.2.0-SNAPSHOT"]
+                   [kibu/pushy "0.3.6"]]})
+
 (apply set-env! (mapcat identity global-conf))
 (set-env!
-  ; we don't want intellij to look at util-src, just reference the dependency to auto-manage the module
-  :boot.lein/project-clj {:source-paths (-> (:source-paths global-conf)
-                                            (conj "src-browser"))})
+  :boot.lein/project-clj
+  (merge-with #(apply conj %1 %2) global-conf browser-conf))
 
 (require '[adzerk.boot-cljs :refer :all]
          '[pandeiro.boot-http :refer :all]
@@ -33,12 +38,8 @@
   pom {:project 'com.hyperfiddle/sample-app-runtime
        :version "0.1.0-SNAPSHOT"})
 
-
 (deftask browser []
-         (merge-env! :dependencies '[[com.hyperfiddle/hypercrud.platform.browser "0.2.0-SNAPSHOT"]
-                                     [kibu/pushy "0.3.6"]]
-                     :source-paths #{"src-browser"}
-                     :resource-paths #{"generated-resources-browser"})
+         (apply merge-env! (apply concat browser-conf))
          (comp (cljs)
                (target :dir #{(str "target/browser")})))
 
