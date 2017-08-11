@@ -9,7 +9,7 @@
 #### Build
     $ boot build
 #### Run
-    $ java -jar target/project.jar
+    $ java -jar target/project.jar TRANSACTOR_URI
 
 ## Runtime
 #### Build
