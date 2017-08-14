@@ -1,8 +1,8 @@
 (ns hello-world.main
-    (:gen-class)
-    (:require [hypercrud.server.datomic.core :as server]
-      [hypercrud.server.service :as service]
-      [io.pedestal.http :as bootstrap]))
+  (:gen-class)
+  (:require [hypercrud.server.datomic.core :as server]
+            [hypercrud.server.service :as service]
+            [io.pedestal.http :as bootstrap]))
 
 (def service
   {:env :prod
@@ -11,6 +11,6 @@
    ::bootstrap/port 8080})
 
 (defn -main [transactor-uri]
-      (assert transactor-uri "transactor-uri is a required command line arg")
-      (server/init-datomic transactor-uri)
-      (bootstrap/start (bootstrap/create-server service)))
+  (assert transactor-uri "transactor-uri is a required command line arg")
+  (server/init-datomic transactor-uri)
+  (bootstrap/start (bootstrap/create-server service)))
