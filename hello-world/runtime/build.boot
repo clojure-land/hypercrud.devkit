@@ -1,7 +1,8 @@
 (def global-conf
   {:source-paths #{"src"}
-   :resource-paths #{"resources"}
+   :resource-paths #{"resources" "generated-resources-browser"}
    :dependencies '[[com.hyperfiddle/hypercrud.browser "0.2.0-SNAPSHOT"]
+                   [com.hyperfiddle/hypercrud.platform.browser "0.2.0-SNAPSHOT"]
                    [funcool/promesa "1.8.1"]
                    [org.clojure/clojurescript "1.9.473"]
                    [reagent "0.6.0" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]
@@ -17,15 +18,8 @@
                    [pandeiro/boot-http "0.7.3" :scope "test"]
                    [weasel "0.7.0" :scope "test"]]})
 
-(def browser-conf
-  {:source-paths #{"src-browser"}
-   :resource-paths #{"generated-resources-browser"}
-   :dependencies '[[com.hyperfiddle/hypercrud.platform.browser "0.2.0-SNAPSHOT"]]})
-
 (apply set-env! (mapcat identity global-conf))
-(set-env!
-  :boot.lein/project-clj
-  (merge-with #(apply conj %1 %2) global-conf browser-conf))
+(set-env! :boot.lein/project-clj global-conf)
 
 (require '[adzerk.boot-cljs :refer :all]
          '[pandeiro.boot-http :refer :all]
@@ -37,10 +31,8 @@
   pom {:project 'com.hyperfiddle/hello-world-runtime
        :version "0.1.0-SNAPSHOT"})
 
-(deftask browser []
-         (apply merge-env! (apply concat browser-conf))
-         (comp (cljs)
-               (target :dir #{(str "target/browser")})))
+(deftask build []
+         (comp (cljs) (target)))
 
 (when (> (.lastModified (clojure.java.io/file "build.boot"))
          (.lastModified (clojure.java.io/file "project.clj")))
