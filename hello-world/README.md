@@ -1,10 +1,8 @@
 ## Service
 #### Build
     $ boot build
-#### Install Database
-    $ java -jar target/selfhost-0.0.1-SNAPSHOT.jar
 #### Run
-    $ java -jar target/selfhost-0.0.1-SNAPSHOT.jar YOUR-TRANSACTOR-URI
+    $ java -jar target/project.jar
 
 ## Runtime
 #### Build
