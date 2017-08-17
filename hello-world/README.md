@@ -3,6 +3,10 @@
     $ boot build
 #### Run
     $ java -jar target/project.jar
+Confirm in your browser: http://localhost:8080/
+
+    Hypercrud Server Running!
+
 
 ## Runtime
 #### Build
@@ -12,3 +16,5 @@
 #### Run
     $ cd target/browser
     $ python -m SimpleHTTPServer
+
+View in your browser: http://localhost:8000/
