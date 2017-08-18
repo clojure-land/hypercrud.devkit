@@ -15,7 +15,9 @@
 (defn -main []
   (let [transactor-uri "datomic:mem://"]
     (load/initialize transactor-uri)
+
     (println "Initializing datomic")
     (server/init-datomic transactor-uri)
+
     (println "Starting pedestal")
     (bootstrap/start (bootstrap/create-server service))))

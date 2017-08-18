@@ -14,7 +14,7 @@
   [request-blog])
 
 (defn view [state-atom param-ctx]
-  (-> (hc/hydrate (:peer param-ctx) request-blog)           ; synchronous
+  (-> (hc/hydrate (:peer param-ctx) request-blog)           ; synchronous and reactive
       (either/branch
         (fn [e] [:pre (pr-str e)])
         (fn [result]
