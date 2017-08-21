@@ -1,0 +1,57 @@
+[#:db{:ident :anchor/attribute, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/create?, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/find-element, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/formula, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/ident, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/link, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/managed?, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/prompt, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/render-inline?, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/repeating?, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/tx-fn, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/visible?, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/cardinality, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/doc, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/fulltext, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/hc-type, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/ident, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :unique :db.unique/value, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/index, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/isComponent, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/noHistory, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/renderer, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/unique, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :attribute/valueType, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :database/domain, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :database/ident, :valueType :db.type/string, :cardinality :db.cardinality/one, :unique :db.unique/identity, :id #db/id[:db.part/db]}
+ #:db{:ident :database/index-link, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :database/index-route, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :database/member, :valueType :db.type/string, :cardinality :db.cardinality/many, :id #db/id[:db.part/db]}
+ #:db{:ident :dbhole/name, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :dbhole/value, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :field/attribute, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :field/doc, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :field/order, :valueType :db.type/long, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :field/prompt, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :field/visible?, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :find-element/connection, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :find-element/form, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :find-element/name, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :form/field, :valueType :db.type/ref, :cardinality :db.cardinality/many, :isComponent true, :id #db/id[:db.part/db]}
+ #:db{:ident :form/name, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :hc-type/name, :valueType :db.type/string, :cardinality :db.cardinality/one, :unique :db.unique/value, :id #db/id[:db.part/db]}
+ #:db{:ident :hc-type/renderer, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :hypercrud/ident, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :unique :db.unique/value, :doc "Hypercrud Ident", :id #db/id[:db.part/db]}
+ #:db{:ident :hypercrud/owner, :valueType :db.type/ref, :cardinality :db.cardinality/one, :doc "Hypercrud Owner", :id #db/id[:db.part/db]}
+ #:db{:ident :link/anchor, :valueType :db.type/ref, :cardinality :db.cardinality/many, :isComponent true, :id #db/id[:db.part/db]}
+ #:db{:ident :link/bindings, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :link/ident, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :unique :db.unique/value, :id #db/id[:db.part/db]}
+ #:db{:ident :link/name, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :link/renderer, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :link/request, :valueType :db.type/ref, :cardinality :db.cardinality/one, :isComponent true, :id #db/id[:db.part/db]}
+ #:db{:ident :link-entity/connection, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :link-entity/form, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :link-query/dbhole, :valueType :db.type/ref, :cardinality :db.cardinality/many, :isComponent true, :id #db/id[:db.part/db]}
+ #:db{:ident :link-query/find-element, :valueType :db.type/ref, :cardinality :db.cardinality/many, :isComponent true, :id #db/id[:db.part/db]}
+ #:db{:ident :link-query/single-result-as-entity?, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :link-query/value, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :request/type, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}]

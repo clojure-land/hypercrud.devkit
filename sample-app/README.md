@@ -1,8 +1,23 @@
+# sample-app
+
+TODO description
+
 ## Service
-#### Build
+
+TODO description
+
+#### Build & Run
+To get going, from the service directory, simply run
+
     $ boot build
-#### Run
-    $ java -jar target/project.jar TRANSACTOR_URI
+
+and run the built jar:
+
+    $ java -jar target/project.jar
+
+Confirm success in your browser: http://localhost:8080/
+
+    Hypercrud Server Running!
 
 ## Runtime
 #### Build

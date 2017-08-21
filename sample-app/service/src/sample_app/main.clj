@@ -2,15 +2,22 @@
   (:gen-class)
   (:require [hypercrud.server.datomic.core :as server]
             [hypercrud.server.service :as service]
-            [io.pedestal.http :as bootstrap]))
+            [io.pedestal.http :as bootstrap]
+            [sample-app.load :as load]))
 
 (def service
-  {:env :prod
-   ::bootstrap/routes service/routes
+  {::bootstrap/routes service/routes
    ::bootstrap/type :jetty
-   ::bootstrap/port 8080})
+   ::bootstrap/port 8080
+   ::bootstrap/allowed-origins {:creds true
+                                :allowed-origins (constantly true)}})
 
-(defn -main [transactor-uri]
-  (assert transactor-uri "transactor-uri is a required command line arg")
-  (server/init-datomic transactor-uri)
-  (bootstrap/start (bootstrap/create-server service)))
+(defn -main []
+  (let [transactor-uri "datomic:mem://"]
+    (load/initialize transactor-uri)
+
+    (println "Initializing database registry")
+    (server/init-datomic transactor-uri)
+
+    (println "Starting pedestal")
+    (bootstrap/start (bootstrap/create-server service))))
