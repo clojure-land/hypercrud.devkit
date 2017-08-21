@@ -3,26 +3,54 @@
             [hello-world.core :as app]
             [hypercrud.client.http :as http]
             [hypercrud.client.peer :as peer]
+            [hypercrud.types.DbError :refer [DbError]]
+            [hypercrud.util.core :refer [pprint-str]]
             [promesa.core :as p]
             [reagent.core :as reagent]))
 
 
 (enable-console-print!)
 
-(def state-atom (reagent/atom {}))
+(def state-atom (reagent/atom {:loading? true}))
+(def peer (peer/->Peer state-atom))
 
-(def param-ctx {:peer (peer/->Peer state-atom)})
+(defn ui []
+  (let [{:keys [http-error loading? ptm]} @state-atom]
+    (cond
+      loading?
+      [:h2 "Loading..."]
+
+      http-error
+      [:div
+       [:h2 "Network error"]
+       [:pre (pprint-str http-error)]]
+
+      (some #(instance? DbError %) (vals ptm))
+      [:div
+       [:h2 "Errors"]
+       [:ul
+        (->> ptm
+             (filter (fn [[req resp]] (instance? DbError resp)))
+             (map (fn [[req error]]
+                    (let [error (peer/human-error error req)]
+                      [:li {:key (hash req)}
+                       [:p (:message error)]
+                       [:pre (pprint-str req)]
+                       [:pre (pprint-str (:data error))]]))))]]
+
+      :else
+      [app/view state-atom peer])))
 
 (defn mount-ui []
-  (reagent/render [app/view state-atom param-ctx]
-                  (.getElementById js/document "root")))
+  (reagent/render [ui] (.getElementById js/document "root")))
 
 (defn hydrate-requests []
-  (let [requests (app/request @state-atom param-ctx)]
+  (let [requests (app/request @state-atom peer)]
     (-> (http/hydrate! (goog.Uri. "http://localhost:8080/api/") requests nil)
         (p/then (fn [hypercrud-response]
-                  (swap! state-atom assoc :ptm (:pulled-trees-map hypercrud-response))))
-        (p/catch (fn [e] (js/alert (pr-str e)))))))
+                  (let [ptm (:pulled-trees-map hypercrud-response)]
+                    (swap! state-atom assoc :ptm ptm :loading? false))))
+        (p/catch #(swap! state-atom assoc :http-error % :loading? false)))))
 
 (defn -main []
   (mount-ui)

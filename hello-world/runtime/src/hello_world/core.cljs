@@ -1,6 +1,5 @@
 (ns hello-world.core
-  (:require [cats.monad.either :as either]
-            [hypercrud.client.core :as hc]
+  (:require [hypercrud.client.core :as hc]
             [hypercrud.types.DbVal :refer [->DbVal]]
             [hypercrud.types.QueryRequest :refer [->QueryRequest]]))
 
@@ -10,17 +9,14 @@
                   {"$" (->DbVal [:database/ident "samples-blog"] nil)}
                   {"?post" [(->DbVal [:database/ident "samples-blog"] nil) ['*]]}))
 
-(defn request [state-value param-ctx]
+(defn request [state-value peer]
   [request-blog])
 
-(defn view [state-atom param-ctx]
-  (-> (hc/hydrate (:peer param-ctx) request-blog)           ; synchronous and reactive
-      (either/branch
-        (fn [e] [:pre (pr-str e)])
-        (fn [result]
-          [:ul
-           (->> result
-                (map (fn [relation]
-                       (let [post (get relation "?post")]
-                         [:li {:key (:db/id post)}
-                          (:post/title post)]))))]))))
+(defn view [state-atom peer]
+  (let [result @(hc/hydrate peer request-blog)]             ; synchronous and reactive
+    [:ul
+     (->> result
+          (map (fn [relation]
+                 (let [post (get relation "?post")]
+                   [:li {:key (:db/id post)}
+                    (:post/title post)]))))]))

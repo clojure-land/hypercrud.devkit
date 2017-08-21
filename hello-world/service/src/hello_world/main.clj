@@ -16,7 +16,7 @@
   (let [transactor-uri "datomic:mem://"]
     (load/initialize transactor-uri)
 
-    (println "Initializing datomic")
+    (println "Initializing database registry")
     (server/init-datomic transactor-uri)
 
     (println "Starting pedestal")
