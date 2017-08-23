@@ -1,10 +1,15 @@
 (ns sample-app.core
-  (:require [hypercrud.browser.core :as browser]))
+  (:require [hypercrud.browser.core :as browser]
+            [hypercrud.types.DbId :refer [->DbId]]
+
+    ; defaults for defmethods
+            [hypercrud.ui.auto-control-default]))
 
 
-(def app-value {})
-
-(def root-conn-id 17592186045422)
+(def index-link
+  {:domain nil
+   :project "samples-blog"
+   :link-dbid (->DbId [:link/ident :samples/blog] [:database/ident "root"])})
 
 (defn view [state-atom param-ctx]
   ; todo network error handling!!
