@@ -1,5 +1,5 @@
 {:require [hello-world.main]
- :init-fns [hello-world.main.-main]
+ :init-fns [hello-world.main/-main]
  :compiler-options {:optimizations :none
                     :pretty-print true
                     ;; root relative because SSR url changes
