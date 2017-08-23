@@ -20,10 +20,24 @@ Confirm success in your browser: http://localhost:8080/
     Hypercrud Server Running!
 
 ## Runtime
-#### Build
+
+TODO description
+
+#### Build & Run
+From the runtime directory, execute the following to compile the browser build:
+
     $ yarn
     $ NODE_ENV=production node_modules/.bin/webpack
     $ boot browser
-#### Run
-    $ cd target/browser
-    $ python -m SimpleHTTPServer
+
+Then execute the following to build the node SSR service
+
+    $ boot node
+
+Then start the node server:
+
+    $ cd target/node
+    $ yarn
+    $ node preamble.js
+
+View in your browser: http://localhost:3000/

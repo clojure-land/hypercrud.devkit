@@ -1,0 +1,8 @@
+{:require [sample-app.main]
+ :init-fns []
+ :compiler-options {:optimizations :none
+                    :pretty-print true
+                    :static-fns true
+                    :target :nodejs
+                    :language-in :ecmascript5
+                    }}

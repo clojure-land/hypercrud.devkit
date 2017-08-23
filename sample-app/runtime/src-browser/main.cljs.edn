@@ -1,7 +1,6 @@
 {:require [sample-app.main]
- :init-fns [sample-app.main.-main]
+ :init-fns [sample-app.main/main]
  :compiler-options {:optimizations :none
                     :pretty-print true
-                    ;; root relative because SSR url changes
-                    :asset-path "/main.out"
+                    :asset-path "/static/main.out"
                     :language-in :ecmascript5}}

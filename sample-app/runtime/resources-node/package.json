@@ -1,0 +1,21 @@
+{
+  "description": "Sample app node runtime",
+  "repository": "https://github.com/hyperfiddle/hypercrud-dev-kit",
+  "license": "EPL-1.0",
+  "dependencies": {
+    "base-64": "0.1.0",
+    "bluebird": "3.3.4",
+    "cheerio": "^0.22.0",
+    "color": "^1.0.3",
+    "eventsource": "^0.2.1",
+    "express": "^4.15.2",
+    "express-winston": "^1.4.2",
+    "react": "15.4.0",
+    "react-addons-create-fragment": "15.4.0",
+    "react-dom": "15.4.0",
+    "request": "^2.81.0",
+    "st": "^1.2.0",
+    "websocket": "^1.0.24",
+    "winston": "^2.3.1"
+  }
+}

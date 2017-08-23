@@ -6,7 +6,6 @@
             [hypercrud.state.actions.core :as actions]
             [hypercrud.state.core :as state]
             [hypercrud.state.reducers :as reducers]
-            [hypercrud.ui.navigate-cmp :as navigate-cmp]
             [pushy.core :as pushy]
             [reagent.core :as reagent]
             [sample-app.core :as app]))
@@ -20,10 +19,14 @@
                   (if-not (empty? s-params)
                     (transit-decode s-params))))
 
-(set! hc/*root-conn-id* 17592186045435 #_(:root-conn-id params))
+(set! hc/*root-conn-id* (:root-conn-id params))
 
 (defonce state-atom
-  (reagent/atom (-> (merge {:entry-uri service-uri} {} #_(:??? params))
+  (reagent/atom (-> (let [s-state (-> (js/document.getElementById "state") .-innerHTML)]
+                      (if-not (empty? s-state)
+                        (transit-decode s-state)
+                        {}))
+                    (assoc :entry-uri service-uri)
                     (reducers/root-reducer nil))))
 
 (def dispatch! (state/build-dispatch state-atom reducers/root-reducer))
@@ -36,9 +39,7 @@
   (let [peer (peer/->Peer state-atom)]
     {:dispatch dispatch!
      :peer peer
-     :root-db (hc/db peer hc/*root-conn-id* nil)
-     :display-mode :user
-     :navigate-cmp navigate-cmp/navigate-cmp}))
+     :root-db (hc/db peer hc/*root-conn-id* nil)}))
 
 (set! state/*request* #(app/request % param-ctx))
 
@@ -58,6 +59,6 @@
 (defn mount-ui []
   (reagent/render [ui] (.getElementById js/document "root")))
 
-(defn -main []
+(defn main []
   (pushy/start! history)
   (mount-ui))
