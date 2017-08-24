@@ -18,9 +18,11 @@
     :navigate-cmp navigate-cmp/navigate-cmp))
 
 (defn view [state-atom param-ctx]
-  ; todo network error handling!!
-  (let [{:keys [route]} @state-atom]
-    [browser/safe-ui' route (app-context param-ctx)]))
+  (let [{:keys [error route]} @state-atom]
+    (if error
+      [:div [:h1 "Fatal error"]
+       [:pre (pr-str error)]]
+      [browser/safe-ui' route (app-context param-ctx)])))
 
 (defn request [state-value param-ctx]
   ; code your own data dependencies, or let the browser figure it out from an app-value
