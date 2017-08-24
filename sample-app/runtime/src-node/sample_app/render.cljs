@@ -1,6 +1,5 @@
 (ns sample-app.render
-  (:require-macros [hypercrud.util.performance :as perf]
-                   [hypercrud.util.template :as template])
+  (:require-macros [hypercrud.util.template :as template])
   (:require [cljs.nodejs :as node]
             [hypercrud.client.core :as hc]
             [hypercrud.client.internal :as internal]
@@ -36,8 +35,8 @@
          param-ctx {:dispatch! dispatch!
                     :peer peer
                     :root-db (hc/db peer hc/*root-conn-id* nil)}
-         app-html (perf/time "render" (reagent/render-to-string (app/view app-state param-ctx)))]
-     (perf/time "template" (evaluated-template static-resources ((or pre-state-change-f identity) @app-state) app-html)))))
+         app-html (reagent/render-to-string (app/view app-state param-ctx))]
+     (evaluated-template static-resources ((or pre-state-change-f identity) @app-state) app-html))))
 
 (defn render-async-no-ssr [static-resources root-rel-path app-state peer]
   ; ignore root-rel-path so pushy kicks off the hydrating on the client
