@@ -38,8 +38,7 @@
 (defonce param-ctx
   (let [peer (peer/->Peer state-atom)]
     {:dispatch dispatch!
-     :peer peer
-     :root-db (hc/db peer hc/*root-conn-id* nil)}))
+     :peer peer}))
 
 (set! state/*request* #(app/request % param-ctx))
 

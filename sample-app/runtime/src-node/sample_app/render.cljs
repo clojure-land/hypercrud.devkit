@@ -33,8 +33,7 @@
   ([app-state peer static-resources pre-state-change-f]
    (let [dispatch! #(assert false "dispatch! not supported in ssr")
          param-ctx {:dispatch! dispatch!
-                    :peer peer
-                    :root-db (hc/db peer hc/*root-conn-id* nil)}
+                    :peer peer  }
          app-html (reagent/render-to-string (app/view app-state param-ctx))]
      (evaluated-template static-resources ((or pre-state-change-f identity) @app-state) app-html))))
 
@@ -55,7 +54,6 @@
                         state-val))
             dispatch! (state/build-dispatch app-state reducer)
             param-ctx {:dispatch! dispatch!
-                       :peer peer
-                       :root-db (hc/db peer hc/*root-conn-id* nil)}]
+                       :peer peer}]
         (binding [state/*request* #(app/request % param-ctx)]
           (dispatch! (actions/set-route-encoded root-rel-path app/index-link)))))))
