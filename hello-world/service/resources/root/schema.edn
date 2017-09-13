@@ -2,7 +2,4 @@
  #:db{:ident :database/ident, :valueType :db.type/string, :cardinality :db.cardinality/one, :unique :db.unique/identity, :id #db/id[:db.part/db]}
  #:db{:ident :database/index-link, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :database/index-route, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :database/member, :valueType :db.type/string, :cardinality :db.cardinality/many, :id #db/id[:db.part/db]}
-
- ; needed for hypercrud.server.database/migration-tx
- #:db{:ident :attribute/ident, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :unique :db.unique/value, :id #db/id[:db.part/db]}]
+ #:db{:ident :database/member, :valueType :db.type/string, :cardinality :db.cardinality/many, :id #db/id[:db.part/db]}]

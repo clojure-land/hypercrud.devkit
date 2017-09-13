@@ -1,5 +1,6 @@
-[#:db{:ident :anchor/attribute, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+[#:db{:ident :anchor/attribute, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :anchor/create?, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :anchor/disabled?, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :anchor/find-element, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :anchor/formula, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :anchor/ident, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
@@ -10,17 +11,9 @@
  #:db{:ident :anchor/repeating?, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :anchor/tx-fn, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :anchor/visible?, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :attribute/cardinality, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :attribute/doc, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :attribute/fulltext, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :attribute/hc-type, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :attribute/ident, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :unique :db.unique/value, :id #db/id[:db.part/db]}
- #:db{:ident :attribute/index, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :attribute/isComponent, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :attribute/noHistory, :valueType :db.type/boolean, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :attribute/renderer, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :attribute/unique, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :attribute/valueType, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :database/domain, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :database/ident, :valueType :db.type/string, :cardinality :db.cardinality/one, :unique :db.unique/identity, :id #db/id[:db.part/db]}
  #:db{:ident :database/index-link, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
@@ -28,7 +21,7 @@
  #:db{:ident :database/member, :valueType :db.type/string, :cardinality :db.cardinality/many, :id #db/id[:db.part/db]}
  #:db{:ident :dbhole/name, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :dbhole/value, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :field/attribute, :valueType :db.type/ref, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
+ #:db{:ident :field/attribute, :valueType :db.type/keyword, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :field/doc, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :field/order, :valueType :db.type/long, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
  #:db{:ident :field/prompt, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
