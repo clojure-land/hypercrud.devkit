@@ -12,11 +12,12 @@
     @(d/transact conn data)))
 
 (defn initialize [transactor-uri]
-  (let [samples-blog-uri (str transactor-uri "samples-blog")]
+  (let [samples-blog-uri (str transactor-uri "samples-blog")
+        root-uri (str transactor-uri "root")]
     (println "Loading samples-blog")
     (when-not (d/create-database samples-blog-uri)
       (throw (Error. "samples-blog db already exists")))
-    (load-samples-blog samples-blog-uri))
+    (load-samples-blog samples-blog-uri)
 
-  (let [root-schema (-> (io/resource "root/schema.edn") slurp read-string)]
-    (root-init/init transactor-uri root-schema)))
+    (let [root-schema (-> (io/resource "root/schema.edn") slurp read-string)]
+      (root-init/init root-uri transactor-uri root-schema))))

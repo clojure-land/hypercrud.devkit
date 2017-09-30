@@ -1,7 +1,6 @@
 (ns hello-world.main
   (:gen-class)
   (:require [hello-world.load :as load]
-            [hypercrud.server.datomic.core :as server]
             [hypercrud.server.service :as service]
             [io.pedestal.http :as bootstrap]))
 
@@ -15,9 +14,6 @@
 (defn -main []
   (let [transactor-uri "datomic:mem://"]
     (load/initialize transactor-uri)
-
-    (println "Initializing database registry")
-    (server/init-datomic transactor-uri)
 
     (println "Starting pedestal")
     (bootstrap/start (bootstrap/create-server service))))

@@ -1,13 +1,14 @@
 (ns hello-world.core
   (:require [hypercrud.client.core :as hc]
             [hypercrud.types.DbVal :refer [->DbVal]]
-            [hypercrud.types.QueryRequest :refer [->QueryRequest]]))
+            [hypercrud.types.QueryRequest :refer [->QueryRequest]]
+            [hypercrud.types.URI :refer [->URI]]))
 
 
 (def request-blog
   (->QueryRequest '[:find ?post :in $ :where [?post :post/title]]
-                  {"$" (->DbVal [:database/ident "samples-blog"] nil)}
-                  {"?post" [(->DbVal [:database/ident "samples-blog"] nil) ['*]]}))
+                  {"$" (->DbVal (->URI "datomic:mem://samples-blog") nil)}
+                  {"?post" [(->DbVal(->URI "datomic:mem://samples-blog") nil) ['*]]}))
 
 (defn request [state-value peer]
   [request-blog])

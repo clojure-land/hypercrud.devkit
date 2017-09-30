@@ -1,9 +1,9 @@
 (ns hello-world.main
-  (:require [goog.Uri]
-            [hello-world.core :as app]
+  (:require [hello-world.core :as app]
             [hypercrud.client.http :as http]
             [hypercrud.client.peer :as peer]
             [hypercrud.types.DbError :refer [DbError]]
+            [hypercrud.types.URI :refer [->URI]]
             [hypercrud.util.core :refer [pprint-str]]
             [promesa.core :as p]
             [reagent.core :as reagent]))
@@ -46,7 +46,7 @@
 
 (defn hydrate-requests []
   (let [requests (app/request @state-atom peer)]
-    (-> (http/hydrate! (goog.Uri. "http://localhost:8080/api/") requests nil)
+    (-> (http/hydrate! (->URI "http://localhost:8080/api/") requests nil)
         (p/then (fn [hypercrud-response]
                   (let [ptm (:pulled-trees-map hypercrud-response)]
                     (swap! state-atom assoc :ptm ptm :loading? false))))
