@@ -8,14 +8,7 @@
 
                    ; build/test/dev
                    [adzerk/boot-cljs "1.7.228-1" :scope "test"]
-                   [adzerk/boot-cljs-repl "0.3.3" :scope "test"]
-                   [adzerk/boot-reload "0.5.1" :scope "test"]
-                   [sparkfund/boot-lein-generate "0.3.0" :scope "test"]
-                   [com.cemerick/piggieback "0.2.1" :scope "test"]
-                   [org.clojure/tools.nrepl "0.2.12" :scope "test"]
-                   [org.clojure/clojure "1.8.0"]
-                   [pandeiro/boot-http "0.7.3" :scope "test"]
-                   [weasel "0.7.0" :scope "test"]]})
+                   [sparkfund/boot-lein-generate "0.3.0" :scope "test"]]})
 
 (def browser-conf
   {:source-paths #{"src-browser"}
@@ -34,9 +27,6 @@
   (merge-with #(apply conj %1 %2) global-conf browser-conf node-conf))
 
 (require '[adzerk.boot-cljs :refer :all]
-         '[pandeiro.boot-http :refer :all]
-         '[adzerk.boot-reload :refer [reload]]
-         '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
          'boot.lein)
 
 (task-options!
