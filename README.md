@@ -1,10 +1,12 @@
 # Hypercrud Devkit
 
-This repo is about 100 lines showing you how to selfhost Hypercrud:
+Fork this project if you'd like to selfhost your hyperfiddle and have full control.
+
+This project shows you how to
 
 * Full control over CLJS and CLJ entrypoints
 * Connect to Datomic
-* Call functions for data driven UI
+* Call into data driven UI functions
 * Node server side rendering
 * HTML5 navigation & router
 
