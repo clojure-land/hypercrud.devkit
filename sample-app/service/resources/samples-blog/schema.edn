@@ -1,3 +1,0 @@
-[#:db{:ident :post/title, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :post/content, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :post/date, :valueType :db.type/instant, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}]

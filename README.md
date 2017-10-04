@@ -1,41 +1,42 @@
 # Hypercrud Devkit
 
-This repo contains two independent projects.
+This repo is about 100 lines showing you how to selfhost Hypercrud:
 
-* [hello-world](hello-world)
-* [sample-app](sample-app)
-
-Hello world is the simplest possible hypercrud project. It's just for understanding, you probably won't use this as a template.
-
-Sample-app is a more use interesting hypercrud project with
-
-* Data driven UI
-* including popovers, branches, staging area
+* Full control over CLJS and CLJ entrypoints
+* Connect to Datomic
+* Call functions for data driven UI
 * Node server side rendering
 * HTML5 navigation & router
 
-This is a good template for real-world hypercrud apps, use this pattern to do prod infrastructure and integrations like the following:
+Use this pattern for production infrastructure stuff when you need to do things like analytics, http headers, auth integrations, custom service security, really anything that you want to do at a lower layer than the data driven UI.
 
-* User login and OAuth
-* Custom service security
-* analytics
-* localstorage
-* environment variables
-* caching/CDN integration
-* database transactions from node
+## Service
 
-## System Requirements
-* [Boot](https://github.com/boot-clj/boot#install)
-* [Java]()
-* [yarn](https://yarnpkg.com/en/docs/install)
-* [Node](https://nodejs.org/)
+    boot build
+    java -jar target/project.jar
 
-## How to set up Cursive
+Confirm in browser: http://localhost:8080/
 
-First generate the leiningen projects for Cursive, in both projects:
+    Hypercrud Server Running!
 
-    # Generates leiningen project for Cursive to import
+## Runtime
+
+    yarn
+    NODE_ENV=production node_modules/.bin/webpack
+    boot browser     # web assets
+    boot node        # node server and assets
+
+    cd target/node
+    yarn
+    node preamble.js
+
+View in your browser: http://localhost:3000/
+
+## Cursive needs a generated leiningen project
+
+Before you launch Cursive, do this:
+
     pushd service && boot show -d && popd
     pushd runtime && boot show -d && popd
 
-When Cursive prompts, **Don't click the Add Source Root!!!** You need to "File > Project Structure > Import Modules".
+If Cursive prompts you, **Don't click 'Add Source Root'!!!** You need to "File > Project Structure > Import Modules".
