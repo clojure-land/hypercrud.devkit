@@ -19,7 +19,7 @@
 (require 'boot.lein)
 
 (task-options!
-  pom {:project 'com.hyperfiddle/sample-app-service
+  pom {:project 'com.hyperfiddle.devkit/service
        :version "0.0.1-SNAPSHOT"}
   aot {:namespace '#{sample-app.main}}
   jar {:main 'sample-app.main})

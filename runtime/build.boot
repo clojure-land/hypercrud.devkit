@@ -40,7 +40,7 @@
          'boot.lein)
 
 (task-options!
-  pom {:project 'com.hyperfiddle/sample-app-runtime
+  pom {:project 'com.hyperfiddle.devkit/runtime
        :version "0.1.0-SNAPSHOT"})
 
 (deftask browser []
