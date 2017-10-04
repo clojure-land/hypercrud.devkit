@@ -5,12 +5,10 @@ a [service](#service) layer for storing and accessing application data and a [ui
 
 ## Service
 
-From service directory:
-
     boot build
     java -jar target/project.jar
 
-Confirm success in your browser: http://localhost:8080/
+Confirm in browser: http://localhost:8080/
 
     Hypercrud Server Running!
 
@@ -18,13 +16,9 @@ Confirm success in your browser: http://localhost:8080/
 
     yarn
     NODE_ENV=production node_modules/.bin/webpack
-    boot build
-
-Browser artifacts are in `target`
+    boot build     # artifacts in `target`
 
     cd target
     python -m SimpleHTTPServer 8000
 
 View in your browser: http://localhost:8000/
-
-Observe HTTP POST to /hydrate with request body and response.

@@ -17,6 +17,10 @@
 (require '[adzerk.boot-cljs :refer :all]
          'boot.lein)
 
+(task-options!
+  pom {:project 'com.hyperfiddle/hello-world-runtime
+       :version "0.1.0-SNAPSHOT"})
+
 (deftask build [] (comp (cljs) (target)))
 
 (when (> (.lastModified (clojure.java.io/file "build.boot"))

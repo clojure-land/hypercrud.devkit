@@ -13,7 +13,6 @@
 
 (defn -main []
   (load/initialize-samples-blog "datomic:mem://samples-blog")
-
   (load/initialize-source-code-db "datomic:mem://source-code")
 
   (println "Starting pedestal")
