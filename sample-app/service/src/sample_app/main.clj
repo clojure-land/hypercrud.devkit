@@ -1,7 +1,6 @@
 (ns sample-app.main
   (:gen-class)
-  (:require [hypercrud.server.datomic.core :as server]
-            [hypercrud.server.service :as service]
+  (:require [hypercrud.server.service :as service]
             [io.pedestal.http :as bootstrap]
             [sample-app.load :as load]))
 
@@ -13,11 +12,9 @@
                                 :allowed-origins (constantly true)}})
 
 (defn -main []
-  (let [transactor-uri "datomic:mem://"]
-    (load/initialize transactor-uri)
+  (load/initialize-samples-blog "datomic:mem://samples-blog")
 
-    (println "Initializing database registry")
-    (server/init-datomic transactor-uri)
+  (load/initialize-source-code-db "datomic:mem://source-code")
 
-    (println "Starting pedestal")
-    (bootstrap/start (bootstrap/create-server service))))
+  (println "Starting pedestal")
+  (bootstrap/start (bootstrap/create-server service)))

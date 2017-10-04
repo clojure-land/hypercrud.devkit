@@ -1,7 +1,6 @@
 (ns sample-app.render
   (:require-macros [hypercrud.util.template :as template])
   (:require [cljs.nodejs :as node]
-            [hypercrud.client.core :as hc]
             [hypercrud.client.internal :as internal]
             [hypercrud.state.actions.core :as actions]
             [hypercrud.state.core :as state]
@@ -17,11 +16,10 @@
 
 (defn evaluated-template [static-resources state-val app-html]
   (let [$ (.load cheerio template)
-        state-val (dissoc state-val :entry-uri)             ;remove any node specific values
-        params {:root-conn-id hc/*root-conn-id*}]
+        ;remove any node specific values
+        state-val (dissoc state-val :entry-uri)]
     (-> ($ "#app-css") (.attr "href" (str static-resources "/styles.css")))
     (-> ($ "#root") (.html app-html))
-    (-> ($ "#params") (.text (internal/transit-encode params)))
     (-> ($ "#state") (.text (internal/transit-encode state-val)))
     (-> ($ "#preamble") (.attr "src" (str static-resources "/preamble.js")))
     (-> ($ "#main") (.attr "src" (str static-resources "/main.js")))
@@ -33,7 +31,7 @@
   ([app-state peer static-resources pre-state-change-f]
    (let [dispatch! #(assert false "dispatch! not supported in ssr")
          param-ctx {:dispatch! dispatch!
-                    :peer peer  }
+                    :peer peer}
          app-html (reagent/render-to-string (app/view app-state param-ctx))]
      (evaluated-template static-resources ((or pre-state-change-f identity) @app-state) app-html))))
 
@@ -56,4 +54,4 @@
             param-ctx {:dispatch! dispatch!
                        :peer peer}]
         (binding [state/*request* #(app/request % param-ctx)]
-          (dispatch! (actions/set-route-encoded root-rel-path app/index-link)))))))
+          (dispatch! (actions/set-route-encoded root-rel-path app/index-route)))))))

@@ -1,0 +1,30 @@
+[{:db/id #db/id[:db.part/user -1]
+  :link/ident :samples/blog
+  :link/renderer "(fn [relations colspec anchors ctx]\n  [:div\n   [:fieldset [:legend \"hello world\"]\n    [:ul\n     (->> relations\n          (map (fn [relation]\n                 (let [post (get relation \"?post\")]\n                   [:li {:key (:db/id post)}\n                    (some-> (:post/date post) .toLocaleDateString) \" \"\n                    ((:link-fn ctx) :sys-edit-?post (:post/title post)\n                     (assoc ctx :entity post))]))))]]\n\n\n   [:style {:dangerouslySetInnerHTML {:__html \"\nlegend { width:inherit; padding:0 10px; border-bottom:none; margin-bottom: 0; }\nfieldset { border: 1px groove #ddd; margin: 0 .5em; padding-top: 0; }\n                                        \"}}]])"
+  :link/anchor #{{:anchor/link #db/id[:db.part/user -3]
+                  :anchor/ident :sys-new-?post
+                  :anchor/prompt "new"}
+                 {:anchor/link #db/id[:db.part/user -3]
+                  :anchor/ident :sys-edit-?post
+                  :anchor/prompt "view"}}
+  :link-query/find-element #{{:find-element/name "?post"
+                              :find-element/form #:db{:id #db/id[:db.part/user -2]}}}
+  :link-query/value "[:find ?post :in $ :where [?post :post/title]]"
+  :link/name "Sample Blog"
+  :request/type :query}
+
+ {:db/id #db/id[:db.part/user -2]
+  :form/name "samples-blog - post"
+  :form/field #{{:field/attribute :post/title
+                 :field/prompt "title"}
+                {:field/attribute :post/date
+                 :field/prompt "date"}
+                {:field/attribute :post/content
+                 :field/prompt "content"}}}
+
+ {:db/id #db/id[:db.part/user -3]
+  :link/name "samples-blog - view post"
+  :link/renderer "(fn [result colspec anchors param-ctx]\n  (let [post (get result \"entity\")]\n    [:div\n     [:h1 (:post/title post)]\n     [:div.markdown\n      {:dangerouslySetInnerHTML\n       {:__html (markdown.core/md->html (:post/content post))}}]]))"
+  :link-query/find-element #{{:find-element/name "entity"
+                              :find-element/form #:db{:id #db/id[:db.part/user -2]}}}
+  :request/type :entity}]

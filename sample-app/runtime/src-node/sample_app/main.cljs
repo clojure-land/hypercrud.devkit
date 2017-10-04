@@ -1,12 +1,9 @@
 (ns sample-app.main
   (:require [cljs.nodejs :as node]
-            [goog.Uri]
-            [hypercrud.client.core :as hc]
-            [hypercrud.client.http :as http]
             [hypercrud.client.peer :as peer]
             [hypercrud.state.reducers :as reducers]
+            [hypercrud.types.URI :refer [->URI]]
             [hypercrud.util.core :as util]
-            [kvlt.core :as kvlt]
             [promesa.core :as p]
             [reagent.core :as reagent]
             [sample-app.render :as render]
@@ -21,7 +18,7 @@
 (def winston (node/require "winston"))
 (def expressWinston (node/require "express-winston"))
 
-(def entry-uri (goog.Uri. "http://localhost:8080/api/"))
+(def entry-uri (->URI "http://localhost:8080/api/"))
 
 (def conf
   {:express-port "3000"
@@ -64,12 +61,6 @@
     (println (str "Express started on port: " (:express-port conf)))))
 
 (defn ^:export main []
-  (-> (kvlt/request!
-        {:url (http/resolve-relative-uri entry-uri (goog.Uri. "root-conn-id"))
-         :method :get
-         :as :auto})
-      (p/then #(set! hc/*root-conn-id* (-> % :body (js/parseInt 10))))
-      (p/then #(start-express))))
-
+  (start-express))
 
 (set! *main-cli-fn* (fn [] nil))
