@@ -1,6 +1,0 @@
-[#:db{:ident :domain/ident, :valueType :db.type/string, :cardinality :db.cardinality/one, :unique :db.unique/identity, :id #db/id[:db.part/db]}
- #:db{:ident :domain/databases, :valueType :db.type/ref, :cardinality :db.cardinality/many, :id #db/id[:db.part/db]}
- #:db{:ident :domain/home-route, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :database/member, :valueType :db.type/string, :cardinality :db.cardinality/many, :id #db/id[:db.part/db]}
- #:db{:ident :dbhole/name, :valueType :db.type/string, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}
- #:db{:ident :dbhole/uri, :valueType :db.type/uri, :cardinality :db.cardinality/one, :id #db/id[:db.part/db]}]

@@ -8,7 +8,7 @@
 (def request-blog
   (->QueryRequest '[:find ?post :in $ :where [?post :post/title]]
                   {"$" (->DbVal (->URI "datomic:mem://samples-blog") nil)}
-                  {"?post" [(->DbVal(->URI "datomic:mem://samples-blog") nil) ['*]]}))
+                  {"?post" [(->DbVal (->URI "datomic:mem://samples-blog") nil) ['*]]}))
 
 (defn request [state-value peer]
   [request-blog])

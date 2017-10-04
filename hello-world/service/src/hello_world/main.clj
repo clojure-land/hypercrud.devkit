@@ -12,8 +12,8 @@
                                 :allowed-origins (constantly true)}})
 
 (defn -main []
-  (let [transactor-uri "datomic:mem://"]
-    (load/initialize transactor-uri)
+  (let [samples-blog-uri "datomic:mem://samples-blog"]
+    (load/initialize-samples-blog samples-blog-uri)
 
     (println "Starting pedestal")
     (bootstrap/start (bootstrap/create-server service))))
