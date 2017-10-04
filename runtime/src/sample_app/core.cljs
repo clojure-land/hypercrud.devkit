@@ -3,22 +3,18 @@
             [hypercrud.types.DbId :refer [->DbId]]
             [hypercrud.types.URI :refer [->URI]]
             [hypercrud.ui.navigate-cmp :as navigate-cmp]
-
-    ; defaults for defmethods
             [hypercrud.ui.auto-control-default]))
 
 
 (def domain
   {:domain/ident "samples-blog"
-   :domain/databases #{{:dbhole/name "$"
-                        :dbhole/uri (->URI "datomic:mem://samples-blog")}}
-   :domain/code-databases #{{:dbhole/name "source-code"
-                             :dbhole/uri (->URI "datomic:mem://source-code")}}})
+   :domain/databases #{{:dbhole/name "$" :dbhole/uri (->URI "datomic:free://localhost:4334/samples-blog")}}
+   :domain/code-databases #{{:dbhole/name "source-code" :dbhole/uri (->URI "datomic:mem://samples-blog-fiddle")}}})
 
 (def index-route
   {:project "samples-blog"
    :code-database "source-code"
-   :link-dbid (->DbId [:link/ident :samples/blog] (->URI "datomic:mem://source-code"))})
+   :link-dbid (->DbId [:link/ident :samples/blog] (->URI "datomic:mem://samples-blog-fiddle"))})
 
 (def display-mode (atom :user))
 

@@ -42,16 +42,17 @@
 (defn render-async-ssr [static-resources root-rel-path app-state peer]
   (p/promise
     (fn [resolve! reject!]
-      (let [reducer (fn [state-val action & args]
-                      (let [state-val (apply reducers/root-reducer state-val action args)
-                            ; we want pushy to kick-off and maintain our route on the client
-                            pre-state-change-f #(dissoc % :route)]
-                        ; we can still pre-render hydrate failures and other errors
-                        (when (contains? #{:hydrate!-success :hydrate!-failure :set-error} action)
-                          (resolve! (render-ui app-state peer static-resources pre-state-change-f)))
-                        state-val))
-            dispatch! (state/build-dispatch app-state reducer)
+      (let [dispatch! (state/build-dispatch app-state reducers/root-reducer)
             param-ctx {:dispatch! dispatch!
                        :peer peer}]
+        (add-watch app-state :ssr (fn [k r o n]
+                                    (when (or (and (:hydrate-id o) (not (:hydrate-id n)))
+                                              ; we can still pre-render hydrate failures and other errors
+                                              (:error n))
+                                      (try
+                                        ; dissoc route so pushy kicks off and maintains the route on the client
+                                        (resolve! (render-ui app-state peer static-resources #(dissoc % :route)))
+                                        (catch :default e (reject! e)))
+                                      (remove-watch r k))))
         (binding [state/*request* #(app/request % param-ctx)]
           (dispatch! (actions/set-route-encoded root-rel-path app/index-route)))))))
