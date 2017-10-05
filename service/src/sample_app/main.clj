@@ -5,27 +5,30 @@
             [hypercrud.server.service :as service]
             [io.pedestal.http :as bootstrap]))
 
+(defn edn! [resource-name] (-> resource-name io/resource slurp read-string))
+
 (def service
   {::bootstrap/routes service/routes
    ::bootstrap/type :jetty
    ::bootstrap/port 8080
    ::bootstrap/allowed-origins {:creds true :allowed-origins (constantly true)}})
 
-(defn load-db! [uri schema-file data-file]
-  (let [conn (d/connect uri)]
-    @(d/transact conn (-> schema-file slurp read-string))
-    @(d/transact conn (-> data-file slurp read-string))))
+(def app-db "datomic:free://localhost:4334/samples-blog")
+(def fiddle-db "datomic:mem://samples-blog-fiddle")
 
 (defn -main []
-  (when (d/create-database "datomic:free://localhost:4334/samples-blog")
-    (load-db! "datomic:free://localhost:4334/samples-blog"
-              (io/resource "samples-blog/schema.edn")
-              (io/resource "samples-blog/data.edn")))
+  (when (d/create-database app-db)
+    (let [c (d/connect app-db)]
+      (doseq [r ["samples-blog/schema.edn"
+                 "samples-blog/data.edn"]]
+        @(d/transact c (edn! r)))))
 
-  (d/create-database "datomic:mem://samples-blog-fiddle")
-  (load-db! "datomic:mem://samples-blog-fiddle"
-            (io/resource "source-code/schema.edn")
-            (io/resource "source-code/data.edn"))
+  (d/create-database fiddle-db)
+  (let [c (d/connect fiddle-db)]
+    (doseq [r ["source-code/schema.edn"
+               "source-code/data.edn"]]
+      @(d/transact c (edn! r))))
 
-  (println "Starting pedestal")
-  (bootstrap/start (bootstrap/create-server service)))
+  (bootstrap/start (bootstrap/create-server service))
+
+  (println "Serving"))
