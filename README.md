@@ -1,7 +1,7 @@
 # Hypercrud Devkit
 > Browser, Node and JVM scaffolding for selfhost.
 
-Fork this project to selfhost a hyperfiddle.
+Fork this project to selfhost a hyperfiddle, or to use the Hypercrud I/O layer directly.
 
 * Nodejs entrypoint with server side rendering
 * Browser entrypoint with HTML5 navigation & router
