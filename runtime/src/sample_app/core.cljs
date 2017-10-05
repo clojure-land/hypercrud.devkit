@@ -18,12 +18,16 @@
 
 (def display-mode (atom :user))
 
+(defn ui-error [e ctx]
+  [:pre (:message e) "\n" (pr-str (:data e))])
+
 (defn app-context [ctx]
   (assoc ctx
     :code-database "source-code"                            ; todo eventually can be removed
     :display-mode display-mode
     :domain domain
-    :navigate-cmp navigate-cmp/navigate-cmp))
+    :navigate-cmp navigate-cmp/navigate-cmp
+    :ui-error ui-error))
 
 (defn view [state-atom ctx]
   (let [{:keys [error route]} @state-atom]
