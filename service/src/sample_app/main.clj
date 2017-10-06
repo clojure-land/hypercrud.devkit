@@ -11,6 +11,7 @@
   {::bootstrap/routes service/routes
    ::bootstrap/type :jetty
    ::bootstrap/port 8080
+   ::bootstrap/join? false
    ::bootstrap/allowed-origins {:creds true :allowed-origins (constantly true)}})
 
 (def app-db "datomic:free://localhost:4334/samples-blog")
