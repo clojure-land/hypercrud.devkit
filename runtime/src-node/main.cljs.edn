@@ -1,6 +1,6 @@
 {:require [sample-app.main]
  :init-fns []
- :compiler-options {:optimizations :none
+ :compiler-options {:optimizations :simple                  ; work around cljs bug -cljs.core.load_file emitted with hardcoded absolute path
                     :pretty-print true
                     :static-fns true
                     :target :nodejs

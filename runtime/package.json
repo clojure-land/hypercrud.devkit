@@ -4,7 +4,6 @@
   "license": "EPL-1.0",
   "dependencies": {
     "animate.css": "^3.5.2",
-    "bluebird": "3.3.4",
     "bootstrap": "^3.3.7",
     "codemirror": "^5.25.2",
     "color": "^1.0.3",

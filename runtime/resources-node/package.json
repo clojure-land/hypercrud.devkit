@@ -4,7 +4,6 @@
   "license": "EPL-1.0",
   "dependencies": {
     "base-64": "0.1.0",
-    "bluebird": "3.3.4",
     "cheerio": "^0.22.0",
     "color": "^1.0.3",
     "eventsource": "^0.2.1",

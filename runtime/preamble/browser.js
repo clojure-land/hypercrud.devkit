@@ -2,7 +2,6 @@ window.React = require("react");
 window.reactCreateFragment = require('react-addons-create-fragment');
 window.ReactDOM = require("react-dom");
 window.ReactDOMServer = require("react-dom/server"); // Reagent depends on ReactDOMServer in browsers
-window.Promise = require("bluebird");
 window.CodeMirror = require("codemirror");
 window.NativeListener = require("react-native-listener");
 window.Color = require("color");
