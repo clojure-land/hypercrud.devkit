@@ -10,7 +10,7 @@
 (def service
   {::bootstrap/routes service/routes
    ::bootstrap/type :jetty
-   ::bootstrap/port 8080
+   ::bootstrap/port 8081
    ::bootstrap/join? false
    ::bootstrap/allowed-origins {:creds true :allowed-origins (constantly true)}})
 

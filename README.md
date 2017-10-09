@@ -15,12 +15,36 @@ Hypercrud is a *ClojureScript library*, you compose values and simple functions.
 
 There is also a tiny Clojure piece, 2-300 loc that wraps Datomic API. It's mostly historical and predates the Datomic Client API and it's probably possible to just replace with a Datomic Client. There is also an example Pedestal service which you can use or ignore.
 
+
+# How to run
+
+1. Datomic - download and run
+2. Web service - build and run
+3. Node server - build and run
+
+## Datomic
+
+Get Datomic Free here: https://my.datomic.com/downloads/free
+
+    wget --output-document=datomic.zip https://my.datomic.com/downloads/free/0.9.5561.62
+    unzip datomic.zip
+    cd datomic-free-0.9.5561.62
+    bin/transactor -Xmx1024m -Xms256m `pwd`/config/samples/free-transactor-template.properties
+    
+You should see:
+    
+    System started datomic:free://localhost:4334/<DB-NAME>, storing data in: data
+
 ## JVM web service
 
     boot build
-    java -jar target/project.jar
+    java -jar target/service-0.0.1-SNAPSHOT.jar
+    
+You should see:
 
-Confirm in browser: http://localhost:8080/
+    Serving
+
+Confirm in browser: http://localhost:8081/
 
     Hypercrud Server Running!
 
@@ -35,7 +59,7 @@ Confirm in browser: http://localhost:8080/
     yarn
     node preamble.js
 
-Confirm in your browser: http://localhost:3000/
+Confirm in your browser: http://localhost:8080/
 
 #### Cursive needs a generated leiningen project
 

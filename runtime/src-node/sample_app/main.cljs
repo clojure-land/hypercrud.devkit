@@ -18,10 +18,10 @@
 (def winston (node/require "winston"))
 (def expressWinston (node/require "express-winston"))
 
-(def entry-uri (->URI "http://localhost:8080/api/"))
+(def entry-uri (->URI "http://localhost:8081/api/"))
 
 (def conf
-  {:express-port "3000"
+  {:express-port "8080"
    :static-resources "/static"
    :browser-script-dir "../browser"
    :ssr-disabled false})
