@@ -7,13 +7,17 @@ Fork this project to selfhost a hyperfiddle, or to use the Hypercrud I/O layer d
 * Browser entrypoint with HTML5 navigation & router
 * JVM entrypoint with Pedestal server and Datomic
 
-Use this pattern for production infrastructure stuff when you need to do things like analytics, http headers, auth integrations, custom service security, really anything that you want to do at a lower layer than the data driven UI.
+Use this pattern for production infrastructure stuff when you need to integrate things like analytics, http headers, auth integrations, custom service security, really anything that you want to do at a lower layer than the data driven UI.
 
 ## Library or framework?
 
 Hypercrud is a *ClojureScript library*, you compose values and simple functions. No macros, interfaces, dependency injection or anything like that.
 
-There is also a tiny Clojure piece, 2-300 loc that wraps Datomic API. It's mostly historical and predates the Datomic Client API and it's probably possible to just replace with a Datomic Client. There is also an example Pedestal service which you can use or ignore.
+There is also a tiny Clojure piece, 2-300 loc that wraps Datomic Peer API, responsible for the following:
+
+1. serialize Datomic API requests and responses from the UI process
+1. host Datomic Peer API calls
+1. Configure any database filters
 
 
 # How to run
@@ -61,7 +65,7 @@ Confirm in browser: http://localhost:8081/
 
 Confirm in your browser: http://localhost:8080/
 
-#### Cursive needs a generated leiningen project
+### Cursive needs a generated leiningen project
 
 Before you launch Cursive, do this:
 
