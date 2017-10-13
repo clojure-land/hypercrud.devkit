@@ -13,7 +13,7 @@
 
 (enable-console-print!)
 
-(def service-uri (->URI "http://localhost:8080/api/"))
+(def service-uri (->URI "http://localhost:8081/api/"))
 
 (def ui
   (reagent/create-class
