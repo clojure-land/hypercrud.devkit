@@ -41,7 +41,7 @@
                                      (reducers/root-reducer nil)))
         dispatch! (state/build-dispatch state-atom reducers/root-reducer)
         history (pushy/pushy (fn [page-path]
-                               (dispatch! (actions/set-route-encoded page-path app/index-route)))
+                               (dispatch! (actions/set-route page-path)))
                              identity)
         ctx (let [peer (peer/->Peer state-atom)]
               {:dispatch! dispatch!

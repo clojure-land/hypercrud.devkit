@@ -1,5 +1,6 @@
 (ns sample-app.core
   (:require [hypercrud.browser.core :as browser]
+            [hypercrud.browser.routing :as routing]
             [hypercrud.types.DbId :refer [->DbId]]
             [hypercrud.types.URI :refer [->URI]]
             [hypercrud.ui.navigate-cmp :as navigate-cmp]
@@ -12,8 +13,7 @@
    :domain/code-databases #{{:dbhole/name "source-code" :dbhole/uri (->URI "datomic:mem://samples-blog-fiddle")}}})
 
 (def index-route
-  {:project "samples-blog"
-   :code-database "source-code"
+  {:code-database "source-code"
    :link-dbid (->DbId [:link/ident :samples/blog] (->URI "datomic:mem://samples-blog-fiddle"))})
 
 (def display-mode (atom :user))
@@ -30,12 +30,14 @@
     :ui-error ui-error))
 
 (defn view [state-atom ctx]
-  (let [{:keys [error route]} @state-atom]
+  (let [{:keys [error encoded-route]} @state-atom
+        route (or (routing/decode encoded-route) index-route)]
     (if error
       [:div [:h1 "Fatal error"]
        [:pre (pr-str error)]]
       [browser/ui-from-route route (app-context ctx)])))
 
 (defn request [state-value ctx]
-  ; code your own data dependencies, or let the browser figure it out from an source-code
-  (browser/request-from-route (:route state-value) (app-context ctx)))
+  (let [route (or (routing/decode (:encoded-route state-value)) index-route)]
+    ; code your own data dependencies, or let the browser figure it out from an source-code
+    (browser/request-from-route route (app-context ctx))))

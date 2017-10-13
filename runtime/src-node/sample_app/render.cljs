@@ -55,4 +55,4 @@
                                         (catch :default e (reject! e)))
                                       (remove-watch r k))))
         (binding [state/*request* #(app/request % param-ctx)]
-          (dispatch! (actions/set-route-encoded root-rel-path app/index-route)))))))
+          (dispatch! (actions/set-route root-rel-path)))))))
