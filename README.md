@@ -13,16 +13,12 @@ Use this pattern for production infrastructure stuff when you need to integrate 
 
 Hypercrud is a *ClojureScript library*, you compose values and simple functions. No macros, interfaces, dependency injection or anything like that.
 
-There is also a tiny Clojure piece, 2-300 loc that wraps Datomic Peer API, responsible for the following:
-
-1. serialize Datomic API requests and responses from the UI process
-1. host Datomic Peer API calls
-1. Configure any database filters
+There is also a tiny Clojure piece, 2-300 loc that wraps Datomic API in a web service.
 
 
 # How to run
 
-1. Datomic - download and run
+1. Datomic - download and run a transactor
 2. Web service - build and run
 3. Node server - build and run
 
@@ -60,12 +56,12 @@ Confirm in browser: http://localhost:8081/
     boot node
 
     cd target/node
-    yarn
+    yarn      # again, this is a workaround for an issue with boot
     node preamble.js
 
 Confirm in your browser: http://localhost:8080/
 
-### Cursive needs a generated leiningen project
+### Cursive users: generate project.clj
 
 Before you launch Cursive, do this:
 
