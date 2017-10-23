@@ -37,6 +37,7 @@ You should see:
 
 ## JVM web service
 
+    cd service
     boot build
     java -jar target/service-0.0.1-SNAPSHOT.jar
     
@@ -50,6 +51,7 @@ Confirm in browser: http://localhost:8081/
 
 ## Node web server and browser assets
 
+    cd runtime
     yarn
     NODE_ENV=production node_modules/.bin/webpack
     boot browser
